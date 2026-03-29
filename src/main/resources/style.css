@@ -1,0 +1,781 @@
+#mainbg{
+    -fx-background-color: #1c1c1c; /* dark background */
+    -fx-border-color: #858585;        /* border color */
+    -fx-border-width: 1;           /* border width */
+    -fx-padding: 2;               /* padding inside the box */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0, 0); /* subtle shadow */
+}
+
+
+#loginbtn ,#regbtn {
+    -fx-background-color: #333;   /* default bg */
+    -fx-text-fill: #a8a8a8;       /* default text */
+    -fx-border-color: #555;        /* border */
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 8 16;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+#loginbtn:hover ,#regbtn:hover {
+    -fx-background-color: #111;   /* dark bg on hover */
+    -fx-text-fill: white;         /* text turns white */
+}
+#loginbtn:pressed , #regbtn:pressed{
+    -fx-background-color: #000;   /* darker bg when pressed */
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.12), 15, 0.5, 0, 0); /* glow on press */
+}
+
+
+#closewin {
+    -fx-text-fill: #c40000;              /* text color */
+    -fx-background-color: rgba(94, 89, 90, 0.53);
+    -fx-border-color: transparent;         /* border color */
+    -fx-border-width: 1;               /* border width */
+    -fx-border-radius: 5;              /* rounded corners */
+    -fx-background-radius: 5;          /* match border radius */
+}
+#closewin:hover {
+    -fx-background-color: transparent; /* transparent bg */
+    -fx-text-fill: #756e6e;              /* text color */
+    -fx-border-color: #7a002b;         /* border color */
+}
+
+
+#minwin {
+    -fx-text-fill: #00c48c;              /* text color */
+    -fx-background-color: rgba(94, 89, 90, 0.53);
+    -fx-border-color: transparent;         /* border color */
+    -fx-border-width: 1;               /* border width */
+    -fx-border-radius: 5;              /* rounded corners */
+    -fx-background-radius: 5;          /* match border radius */
+}
+#minwin:hover {
+    -fx-background-color: transparent; /* transparent bg */
+    -fx-text-fill: #756e6e;              /* text color */
+    -fx-border-color: #007959;         /* border color */
+}
+#minwin:pressed ,#closewin:pressed {
+    -fx-border-color: rgba(94, 0, 0, 0);         /* border color */
+    -fx-text-fill: #3d3d3d;              /* text color */
+    -fx-background-color: rgba(110, 110, 110, 0.93);
+    -fx-effect: dropshadow(gaussian, rgba(119, 119, 119, 0.53), 15, 0.5, 0, 0); /* glow on press */
+}
+
+
+
+#logoutwin {
+    -fx-text-fill: #00a0c4;              /* text color */
+    -fx-background-color: rgba(94, 89, 90, 0.53);
+    -fx-border-color: transparent;         /* border color */
+    -fx-border-width: 1;               /* border width */
+    -fx-border-radius: 5;              /* rounded corners */
+    -fx-background-radius: 5;          /* match border radius */
+}
+#logoutwin:hover {
+    -fx-background-color: transparent; /* transparent bg */
+    -fx-text-fill: #756e6e;              /* text color */
+    -fx-border-color: #00a0c4;         /* border color */
+}
+#logoutwin:pressed ,#closewin:pressed {
+    -fx-border-color: rgba(94, 0, 0, 0);         /* border color */
+    -fx-text-fill: #3d3d3d;              /* text color */
+    -fx-background-color: rgba(110, 110, 110, 0.93);
+    -fx-effect: dropshadow(gaussian, rgba(119, 119, 119, 0.53), 15, 0.5, 0, 0); /* glow on press */
+}
+
+
+
+
+#refreshbtn {
+    -fx-text-fill: #9f9f9f;              /* text color */
+    -fx-background-color: rgba(94, 89, 90, 0.53);
+    -fx-border-color: transparent;         /* border color */
+    -fx-border-width: 1;               /* border width */
+    -fx-border-radius: 5;              /* rounded corners */
+    -fx-background-radius: 5;          /* match border radius */
+}
+#refreshbtn:hover {
+    -fx-background-color: transparent; /* transparent bg */
+    -fx-text-fill: #756e6e;              /* text color */
+    -fx-border-color: #9f9f9f;         /* border color */
+}
+#refreshbtn:pressed ,#closewin:pressed {
+    -fx-border-color: rgba(94, 0, 0, 0);         /* border color */
+    -fx-text-fill: #3d3d3d;              /* text color */
+    -fx-background-color: rgba(110, 110, 110, 0.93);
+    -fx-effect: dropshadow(gaussian, rgba(119, 119, 119, 0.53), 15, 0.5, 0, 0); /* glow on press */
+}
+
+
+
+
+
+/* global button template never used */
+#global_bnt {
+    -fx-background-color: #333;   /* default bg */
+    -fx-text-fill: #a8a8a8;       /* default text */
+    -fx-border-color: #555;        /* border */
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 8 16;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+#global_bnt:hover {
+    -fx-background-color: #646464;   /* dark bg on hover */
+    -fx-text-fill: white;         /* text turns white */
+}
+#global_bnt:pressed{
+    -fx-background-color: #000;   /* darker bg when pressed */
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 196, 140, 0.27), 15, 0.5, 0, 0); /* glow on press */
+}
+
+
+
+
+
+/* === Button (green Button) === */
+#reg_stu_btn ,#Scarch_btn_sp  , #Att_mark_btn , #mark_fee_btn ,#apply_btn_conf ,#reg_new_sub_stu ,#reg_upd_mob_btn ,#reg_rem_ver_btn ,#gsrAppltBtn ,#apply_btn_conf2 ,#db_unpaid_details_save_btn ,#r5_print_btn{
+    -fx-background-color: #00c48c;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 196, 140, 0.27), 15, 0.5, 0, 0);
+}
+#reg_stu_btn:hover ,#Scarch_btn_sp:hover , #Att_mark_btn:hover , #mark_fee_btn:hover , #apply_btn_conf:hover ,#reg_new_sub_stu:hover ,#reg_upd_mob_btn:hover ,#reg_rem_ver_btn:hover ,#gsrAppltBtn:hover ,#apply_btn_conf2:hover ,#db_unpaid_details_save_btn:hover ,#r5_print_btn:hover{
+    -fx-background-color: #00a370;
+}
+#reg_stu_btn:pressed ,#Scarch_btn_sp:pressed , #Att_mark_btn:pressed , #mark_fee_btn:pressed , #apply_btn_conf:pressed ,#reg_new_sub_stu:pressed ,#reg_upd_mob_btn:pressed ,#reg_rem_ver_btn:pressed ,#gsrAppltBtn:pressed , #apply_btn_conf2:pressed ,#db_unpaid_details_save_btn:pressed ,#r5_print_btn:pressed{
+    -fx-background-color: #008060;
+}
+
+
+/* === Button (gray Button) === */
+#mark_tute_btn{
+    -fx-background-color: #bebebe;
+    -fx-text-fill: #262626;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(115, 115, 115, 0.27), 15, 0.5, 0, 0);
+}
+#mark_tute_btn:hover{
+    -fx-background-color: #9b9b9b;
+}
+#mark_tute_btn:pressed{
+    -fx-background-color: #7e7e7e;
+}
+
+
+
+
+
+/* === Button (red Button) === */
+#erase_stu_btn_sp ,#unreg_new_sub_stu, #apply_btn_conf3 ,#apply_btn_conf4 {
+    -fx-background-color: #c40000;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(196, 0, 0, 0.27), 15, 0.5, 0, 0);
+}
+#erase_stu_btn_sp:hover ,#unreg_new_sub_stu:hover , #apply_btn_conf3:hover , #apply_btn_conf4:hover {
+    -fx-background-color: #a30000;
+}
+#erase_stu_btn_sp:pressed ,#unreg_new_sub_stu:pressed , #apply_btn_conf3:pressed , #apply_btn_conf4:pressed {
+    -fx-background-color: #800000;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* === TableView Dark Modern Style (Global) === */
+.table-view {
+    -fx-background-color: #2b2b2b; /* table bg */
+    -fx-control-inner-background: #2b2b2b;
+    -fx-border-color: transparent; /* no outer border */
+    -fx-table-cell-border-color: transparent; /* remove cell borders */
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 15, 0.3, 0, 2);
+}
+
+/* === Column Header Row === */
+.table-view .column-header-background {
+    -fx-background-color: #1f1f1f; /* darker header bar */
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #00c48c;   /* green header text */
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-transform: uppercase; /* all caps */
+    -fx-alignment: CENTER-LEFT;   /* align text to left */
+}
+
+
+
+
+/* === Table Rows === */
+.table-view .table-row-cell {
+    -fx-background-color: #2b2b2b;  /* row color */
+    -fx-text-fill: #e0e0e0;         /* row text */
+    -fx-font-size: 13px;
+/*    -fx-cell-size: 40px;            row height */
+}
+.table-view .table-row-cell:odd {
+    -fx-background-color: #262626;  /* alternate row */
+}
+.table-view .table-row-cell:hover {
+    -fx-background-color: #333;     /* hover effect */
+}
+
+
+/*
+Row selected and not focused fix
+Selected row when table is NOT focused*/
+.table-view .table-row-cell:selected {
+    -fx-background-color: rgba(0, 196, 140, 0.68);
+}
+
+
+
+/* === ScrollBar Styling === */
+.scroll-bar:horizontal, .scroll-bar:vertical {
+    -fx-background-color: transparent; /* background behind scrollbar */
+}
+.scroll-bar .thumb {
+    -fx-background-color: #555;    /* scrollbar handle */
+    -fx-background-radius: 4;      /* rounded handle */
+    -fx-background-insets: 2;
+}
+.scroll-bar .thumb:hover {
+    -fx-background-color: #777;    /* lighter on hover */
+}
+.scroll-bar .thumb:pressed {
+    -fx-background-color: #999;    /* even lighter when pressed */
+}
+.scroll-bar .track {
+    -fx-background-color: #1c1c1c; /* track background */
+    -fx-background-radius: 4;
+}
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent; /* remove arrow bg */
+    -fx-padding: 0;
+}
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: #666;  /* arrow color */
+}
+.scroll-bar .increment-arrow:hover,
+.scroll-bar .decrement-arrow:hover {
+    -fx-background-color: #00c48c; /* arrow hover color (green like headers) */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* tabs */
+
+/* === TabPane Header (Tab Bar Background) === */
+.tab-pane .tab-header-background {
+    -fx-background-color: #1c1c1c;   /* dark background for tab bar */
+    -fx-border-color: #333;          /* subtle border */
+    -fx-border-width: 0 0 0 0;       /* 0 0 1 0 bottom border only */
+}
+
+/* === Tab Default Style === */
+.tab-pane .tab {
+    -fx-background-color: #2b2b2b;   /* default tab bg */
+    -fx-text-fill: #a8a8a8;          /* default text */
+    -fx-padding: 8 16;
+    -fx-background-radius: 8;  /* rounded top corners */
+    -fx-border-radius: 8;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-background-insets: 0 5; /* add gaps between title button tabs */
+}
+/* remove focus blue bg border */
+.tab-pane {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+
+/* === Tab Text === */
+.tab-pane .tab-label {
+    -fx-text-fill: #a8a8a8;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+/* === Hover Effect === */
+.tab-pane .tab:hover {
+    -fx-background-color: #333;      /* darker on hover */
+}
+.tab-pane .tab:hover .tab-label {
+    -fx-text-fill: white;            /* brighter text on hover */
+}
+
+/* === Selected Tab === */
+.tab-pane .tab:selected {
+    -fx-background-color: #00c48c;   /* active tab bg (green) */
+    -fx-border-color: #000000;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 196, 140, 0.07), 15, 0.5, 0, 0);
+}
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #fff;             /* white text for active */
+    -fx-font-weight: bold;
+}
+
+#title1 , #title2 , #title3 , #title4 , #title5, #title6 , #title7 , #title8, #title9, #title10, #title11, #title12, #title13, #title14, #title15, #title16, #title17, #title18 , #title19 ,#title20 ,#title21 , #title22 , #title23 ,#title24 , #title25 , #title26 , #title27 , #title28,
+#title29 , #title30 , #title31 , #title32 , #title33 , #title34
+{
+    -fx-background-color: rgba(43, 43, 43, 0.76);   /* box bg */
+    -fx-text-fill: rgba(215, 215, 215, 0.68);
+    -fx-padding: 0 16;               /* spacing around text */
+    -fx-background-radius: 8;        /* rounded corners */
+    -fx-border-radius: 8;
+    -fx-border-color: #000000;          /* border */
+    -fx-border-width: 0.6;
+
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 15, 0.2, 0, 2);
+}
+
+
+#title35 {
+    /* Glassmorphism background */
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-insets: 0;
+    -fx-background-radius: 7;
+    -fx-padding: 4 12;
+
+    /* Frosted blur effect */
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.1), 8, 0.2, 0, 1),
+    dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0.2, 0, 1);
+
+    /* Border style */
+    -fx-border-color: rgba(255, 255, 255, 0.15);
+    -fx-border-radius: 7;
+    -fx-border-width: 0.6;
+
+    /* Text style */
+    -fx-text-fill: rgba(176, 176, 176, 0.9);
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+
+    /* Center the text */
+    -fx-alignment: center;
+
+    /* Optional subtle glow */
+    -fx-effect: dropshadow( gaussian , rgba(0, 0, 0, 0.15), 8, 0.2 , 0 , 0 );
+}
+
+
+
+
+/* all TextFields and PasswordFields */
+.text-field, .password-field {
+    -fx-background-color: #2b2b2b;   /* dark input background */
+    -fx-text-fill: #e0e0e0;          /* input text */
+    -fx-border-color: #444;          /* subtle border */
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 6 10;
+    -fx-font-size: 13px;
+}
+
+.text-field:hover, .password-field:hover {
+    -fx-background-color: #333;
+}
+
+/* Focused state for TextField & PasswordField */
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #00c48c;       /* green border when focused */
+    -fx-effect: dropshadow(gaussian, rgba(0,196,140,0.4), 10, 0.5, 0, 0);
+}
+
+
+
+/* === ChoiceBox === */
+.choice-box {
+    -fx-background-color: #2b2b2b;
+    -fx-mark-color: #00c48c;          /* dropdown arrow color */
+    -fx-border-color: #444;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.choice-box .label {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 13px;
+}
+.choice-box:hover {
+    -fx-background-color: #333;
+}
+
+.choice-box:focused {
+    -fx-border-color: #00c48c;       /* green border when focused */
+    -fx-effect: dropshadow(gaussian, rgba(0,196,140,0.4), 10, 0.5, 0, 0);
+}
+
+
+/* Styling the ChoiceBox's dropdown ListView */
+.choice-box .context-menu {
+    -fx-background-color: #2b2b2b; /* dark background for the dropdown */
+    -fx-border-color: #444;       /* border color */
+    -fx-border-radius: 8;
+}
+
+/* Styling the individual list items (ListCells) */
+.choice-box .context-menu .menu-item .label {
+    -fx-text-fill: #e0e0e0;      /* default text color for options */
+}
+.choice-box .context-menu .menu-item {
+    -fx-background-color: #2b2b2b;
+}
+
+/* Hover and selection styles for the list items */
+.choice-box .context-menu .menu-item:hover {
+    -fx-background-color: #333; /* darker background on hover */
+}
+
+
+
+
+/* === RadioButtons === */
+.radio-button {
+    -fx-text-fill: #a8a8a8;
+    -fx-font-size: 14px;
+}
+.radio-button .radio {
+    -fx-border-color: #555;
+    -fx-border-radius: 50%;
+    -fx-background-color: transparent;
+}
+
+.radio-button:hover .radio {
+    -fx-background-color: #333; /* darker background on hover */
+}
+
+.radio-button:selected .radio {
+    -fx-background-color: #00c48c;   /* filled circle when selected */
+    -fx-border-color: #00c48c;
+    -fx-effect: dropshadow(gaussian, rgba(0, 196, 140, 0.27), 15, 0.5, 0, 0);
+}
+
+/* === ListView === */
+.list-view {
+    -fx-background-color: #2b2b2b;
+    -fx-control-inner-background: #2b2b2b;
+    -fx-border-color: #444;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.list-view .list-cell {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 13px;
+}
+.list-view .list-cell:filled:selected {
+    -fx-background-color: #00c48c;   /* selected subject */
+    -fx-text-fill: #fff;
+}
+.list-view .list-cell:hover {
+    -fx-background-color: #333;
+}
+
+
+
+
+/* scrole pane */
+
+.scroll-pane {
+    -fx-background: transparent;
+    -fx-background-color: transparent; /* border */
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent; /* inner content area */
+}
+
+
+
+
+
+
+
+
+
+
+/* === Separators (Fixed for Consistency) === */
+.separator {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+.separator .line {
+    -fx-border-style: solid; /* Solid line */
+    -fx-border-width: 1; /* Thin line */
+    -fx-border-color: #333; /* Dark gray to match theme */
+    -fx-stroke: #333; /* Fallback stroke */
+    -fx-background-color: transparent;
+}
+
+
+
+
+
+
+
+
+
+/* === DatePicker === */
+.date-picker {
+    -fx-background-color: #2b2b2b;  /* dark background */
+    -fx-text-fill: #e0e0e0;         /* text color */
+    -fx-border-color: #444;         /* subtle border */
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 1 2;
+    -fx-font-size: 12px;
+}
+
+/* Hover effect */
+.date-picker:hover {
+    -fx-background-color: #333;
+}
+
+/* Focused state */
+.date-picker:focused {
+    -fx-border-color: #00c48c; /* green border */
+    -fx-effect: dropshadow(gaussian, rgba(0,196,140,0.4), 10, 0.5, 0, 0);
+}
+
+/* The arrow button on the right */
+.date-picker .arrow-button {
+    -fx-background-color: #2b2b2b;
+    -fx-border-radius: 0 8 8 0;
+    -fx-background-radius: 0 8 8 0;
+}
+.date-picker .arrow-button:hover {
+    -fx-background-color: #333;
+}
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #00c48c; /* green arrow */
+}
+
+/* Popup calendar background */
+.date-picker .popup {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #444;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+
+/* Calendar cells */
+.date-picker .calendar-grid {
+    -fx-background-color: #2b2b2b;
+}
+.date-picker .calendar-grid .day-cell {
+    -fx-text-fill: #e0e0e0;    /* default text */
+    -fx-background-color: transparent;
+}
+.date-picker .calendar-grid .day-cell:hover {
+    -fx-background-color: #333;
+    -fx-text-fill: #fff;
+}
+.date-picker .calendar-grid .day-cell:selected {
+    -fx-background-color: #00c48c;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 6;
+}
+
+/* Month/Year navigation buttons */
+.date-picker .spinner .button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+.date-picker .spinner .button:hover .arrow {
+    -fx-background-color: #00c48c;
+}
+.date-picker .spinner .button .arrow {
+    -fx-background-color: #a8a8a8; /* default arrow */
+}
+
+.date-picker .popup .header .label {
+    -fx-text-fill: #00c48c; /* green text */
+    -fx-font-weight: bold;
+}
+
+/* Weekday names (Mon, Tue, Wed, etc.) */
+.date-picker .date-picker-popup .week-number-cell,
+.date-picker .date-picker-popup .day-name-cell {
+    -fx-text-fill: #00c48c;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-background-color: #2b2b2b;
+    -fx-alignment: center;
+}
+
+
+/* Popup calendar background */
+.date-picker .date-picker-popup {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #444;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 15, 0.3, 0, 2);
+}
+
+
+
+/* Calendar header (month/year navigation) */
+.date-picker .date-picker-popup .month-year-pane {
+    -fx-background-color: #1f1f1f; /* Matches TableView header */
+    -fx-padding: 8;
+}
+
+/* Month and Year labels */
+.date-picker .date-picker-popup .month-year-pane .label {
+    -fx-text-fill: #00c48c; /* Green like table headers */
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+
+/* Calendar day cells */
+.date-picker .date-picker-popup .day-cell {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 12px;
+    -fx-alignment: center;
+    -fx-border-color: transparent;
+}
+
+/* Hover effect on day cells */
+.date-picker .date-picker-popup .day-cell:hover {
+    -fx-background-color: #333; /* Matches TableView row hover */
+}
+
+/* Selected day */
+.date-picker .date-picker-popup .day-cell:selected {
+    -fx-background-color: #00c48c; /* Green like selected table row */
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0,196,140,0.27), 10, 0.5, 0, 0);
+}
+
+/* Today’s date */
+.date-picker .date-picker-popup .day-cell.today {
+    -fx-background-color: #333;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #00c48c;
+    -fx-border-width: 1;
+}
+
+#main_clock{
+    -fx-text-fill: #00c48c; /* green text */
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-background-color: rgba(43, 43, 43, 0.76);   /* box bg */
+    -fx-padding: 0 16;               /* spacing around text */
+    -fx-background-radius: 2;        /* rounded corners */
+    -fx-border-radius: 2;
+    -fx-border-color: #000000;          /* border */
+    -fx-border-width: 0.6;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 15, 0.2, 0, 2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === TextArea Styling (Based on TextField) === */
+
+.text-area {
+    -fx-background-color: #2b2b2b;   /* Dark background, matching text-field */
+    -fx-control-inner-background: #2b2b2b; /* Inner control background */
+    -fx-text-fill: #e0e0e0;          /* Light gray text, matching text-field */
+    -fx-border-color: #444;          /* Subtle border, matching text-field */
+    -fx-border-radius: 8;            /* Rounded corners */
+    -fx-background-radius: 8;
+    -fx-padding: 6 10;
+    -fx-font-size: 13px;
+    -fx-border-width: 1;             /* Explicit border width for clarity */
+}
+
+/* ScrollBar within TextArea (Inherits Global ScrollBar Style, but good to ensure) */
+.text-area .scroll-bar:vertical,
+.text-area .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+.text-area .scroll-bar .thumb {
+    -fx-background-color: #555;
+    -fx-background-radius: 4;
+}
+
+/* Hover effect */
+.text-area:hover {
+    -fx-background-color: #333;
+    -fx-control-inner-background: #333;
+}
+
+/* Focused state for TextArea - The Signature Green Glow */
+.text-area:focused {
+    -fx-border-color: #00c48c;       /* Green border when focused */
+    -fx-effect: dropshadow(gaussian, rgba(0,196,140,0.4), 10, 0.5, 0, 0);
+}
+
+/* Content area for multiline input */
+.text-area .content {
+    -fx-background-color: transparent; /* Keep content area transparent to see outer background */
+    -fx-padding: 0;
+}
+
+

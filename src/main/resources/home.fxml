@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="mainbg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="voidbreaker.prolog.Home">
+   <top>
+      <AnchorPane fx:id="titlebar" prefHeight="54.0" prefWidth="1194.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="closewin" layoutX="1164.0" layoutY="6.0" mnemonicParsing="false" onAction="#closeApp" text="x" />
+            <Button fx:id="minwin" layoutX="1131.0" layoutY="6.0" mnemonicParsing="false" onAction="#minimizeApp" text="_" />
+            <Label fx:id="main_clock" layoutX="789.0" layoutY="7.0" textFill="#c9c9c9" />
+            <Label layoutX="35.0" layoutY="9.0" text="Vidupiyasa Educational Institute Management System" textFill="#aeaeae">
+               <font>
+                  <Font name="Book Antiqua Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="logoutwin" layoutX="1057.0" layoutY="6.0" mnemonicParsing="false" onAction="#minimizeApp" text="LOGOUT" />
+            <Button fx:id="refreshbtn" layoutX="977.0" layoutY="6.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="70.0" text="Refresh" />
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="16.0" prefWidth="1194.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="955.0" layoutY="4.0" text="ＶｏｉｄＢｒｅａｋｅｒ. P r o l o g - Ｃ１" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <TabPane prefHeight="887.0" prefWidth="1194.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab text="Dashboard">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2778.0" prefWidth="1194.0">
+                     <children>
+                        <ScrollPane prefHeight="769.0" prefWidth="1192.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2730.0" prefWidth="1182.0">
+                                 <children>
+                                    <Label fx:id="title1" layoutX="20.0" layoutY="22.0" prefHeight="22.0" prefWidth="162.0" text="Student Records" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="dashboardtable_scarch" layoutX="201.0" layoutY="15.0" prefHeight="34.0" prefWidth="271.0" promptText="Scarch" />
+                                    <TableView fx:id="unpaidTable" layoutX="23.0" layoutY="1846.0" prefHeight="557.0" prefWidth="1126.0">
+                                      <columns>
+                                        <TableColumn fx:id="ofr_id" prefWidth="75.19998425245285" resizable="false" text="Student ID" />
+                                          <TableColumn fx:id="ofr_name" prefWidth="231.2000503540039" resizable="false" text="Student Name" />
+                                        <TableColumn fx:id="ofr_grade" minWidth="0.0" prefWidth="50.39996337890625" resizable="false" text="Grade" />
+                                          <TableColumn fx:id="ofr_lpd" prefWidth="93.06671142578125" resizable="false" text="Last payment" />
+                                          <TableColumn fx:id="ofr_um" prefWidth="105.59994506835938" resizable="false" text="Months Unpaid" />
+                                          <TableColumn fx:id="ofr_no" prefWidth="83.2000732421875" resizable="false" text="Contact No" />
+                                          <TableColumn fx:id="ofr_lr" prefWidth="101.86663818359375" resizable="false" text="Last Reminder" />
+                                          <TableColumn fx:id="ofr_rem" prefWidth="394.13330078125" resizable="false" text="Remarks" />
+                                      </columns>
+                                    </TableView>
+                                    <TableView fx:id="dashboardTable" layoutX="22.0" layoutY="64.0" prefHeight="266.0" prefWidth="451.0">
+                                       <columns>
+                                          <TableColumn fx:id="colId" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" sortable="false" text="ID" />
+                                          <TableColumn fx:id="colName" editable="false" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" resizable="false" sortable="false" text="Student name" />
+                                          <TableColumn fx:id="colGrade" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" sortable="false" text="Grade" />
+                                       </columns>
+                                    </TableView>
+                                    <Label fx:id="title11" layoutX="20.0" layoutY="361.0" prefHeight="22.0" prefWidth="665.0" text="Teacher Income Table" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="dash_dp_tr" layoutX="700.0" layoutY="355.0" maxHeight="33.6" minHeight="33.6" prefWidth="166.0" />
+                                    <TableView fx:id="tro_table" layoutX="22.0" layoutY="403.0" prefHeight="360.0" prefWidth="845.0">
+                                      <columns>
+                                        <TableColumn fx:id="tro_grade" editable="false" maxWidth="62.0" minWidth="62.0" prefWidth="62.0" resizable="false" sortable="false" text="Grade" />
+                                        <TableColumn fx:id="tro_sub" editable="false" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" resizable="false" sortable="false" text="Subject" />
+                                          <TableColumn fx:id="tro_teacher" editable="false" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" resizable="false" sortable="false" text="Teacher" />
+                                          <TableColumn fx:id="tro_year" editable="false" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" resizable="false" sortable="false" text="Year Income" />
+                                          <TableColumn fx:id="tro_month" editable="false" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" resizable="false" sortable="false" text="Month Income" />
+                                          <TableColumn fx:id="tro_day" editable="false" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" resizable="false" sortable="false" text="Day Income" />
+                                      </columns>
+                                    </TableView>
+                                    <Label fx:id="title15" layoutX="20.0" layoutY="793.0" prefHeight="22.0" prefWidth="665.0" text="Institute Income Table" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="dash_dp_in" layoutX="700.0" layoutY="788.0" maxHeight="33.6" minHeight="33.6" prefWidth="166.0" />
+                                    <TableView fx:id="iro_table" layoutX="22.0" layoutY="839.0" prefHeight="360.0" prefWidth="845.0">
+                                       <columns>
+                                          <TableColumn fx:id="iro_grade" editable="false" maxWidth="62.0" minWidth="62.0" prefWidth="62.0" resizable="false" sortable="false" text="Grade" />
+                                          <TableColumn fx:id="iro_sub" editable="false" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" resizable="false" sortable="false" text="Subject" />
+                                          <TableColumn fx:id="iro_teacher" editable="false" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" resizable="false" sortable="false" text="Teacher" />
+                                          <TableColumn fx:id="iro_year" editable="false" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" resizable="false" sortable="false" text="Year Income" />
+                                          <TableColumn fx:id="iro_month" editable="false" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" resizable="false" sortable="false" text="Month Income" />
+                                          <TableColumn fx:id="iro_day" editable="false" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" resizable="false" sortable="false" text="Day Income" />
+                                       </columns>
+                                    </TableView>
+                                    <TableView fx:id="s_info_dash" layoutX="510.0" layoutY="63.0" prefHeight="266.0" prefWidth="635.0">
+                                      <columns>
+                                        <TableColumn fx:id="si_grade" maxWidth="62.0" minWidth="62.0" prefWidth="62.0" resizable="false" text="Grade" />
+                                        <TableColumn fx:id="si_id" maxWidth="80.0" minWidth="80.0" resizable="false" text="Subjectc ID" />
+                                          <TableColumn fx:id="si_sub" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" resizable="false" text="Subject" />
+                                          <TableColumn fx:id="si_tea" maxWidth="209.0" minWidth="209.0" prefWidth="209.0" resizable="false" text="Teacher" />
+                                          <TableColumn fx:id="si_fee" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" resizable="false" text="Fee" />
+                                      </columns>
+                                    </TableView>
+                                    <Label fx:id="title16" layoutX="510.0" layoutY="22.0" prefHeight="22.0" prefWidth="634.0" text="Subjects Info." textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="299.0" fitWidth="266.0" layoutX="891.0" layoutY="403.0" opacity="0.07" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@exres/form_bg_0.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="tit_day" layoutX="925.0" layoutY="469.0" text="0.00" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="tit_month" layoutX="925.0" layoutY="559.0" text="0.00" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font></Label>
+                                    <Label fx:id="tit_year" layoutX="925.0" layoutY="649.0" text="0.00" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font></Label>
+                                    <Label fx:id="iit_day" layoutX="925.0" layoutY="904.0" text="0.00" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font></Label>
+                                    <Label fx:id="iit_month" layoutX="925.0" layoutY="994.0" text="0.00" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font></Label>
+                                    <Label fx:id="iit_year" layoutX="925.0" layoutY="1084.0" text="0.00" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font></Label>
+                                    <Label fx:id="title29" layoutX="905.0" layoutY="431.0" prefHeight="22.0" prefWidth="226.0" text="Day Income Total " textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title30" layoutX="905.0" layoutY="521.0" prefHeight="21.0" prefWidth="226.0" text="Month Income Total" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title31" layoutX="905.0" layoutY="611.0" prefHeight="21.0" prefWidth="226.0" text="Year Income Total" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title32" layoutX="905.0" layoutY="866.0" prefHeight="21.0" prefWidth="226.0" text="Day Income Total" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title33" layoutX="905.0" layoutY="956.0" prefHeight="21.0" prefWidth="226.0" text="Month Income Total" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title34" layoutX="905.0" layoutY="1046.0" prefHeight="21.0" prefWidth="226.0" text="Year Income Total" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="sub_stu_list_table" layoutX="737.0" layoutY="1323.0" prefHeight="438.0" prefWidth="410.0">
+                                      <columns>
+                                        <TableColumn fx:id="gsr_stuID" prefWidth="115.20001029968262" resizable="false" text="Student ID" />
+                                        <TableColumn fx:id="gsr_stuName" minWidth="0.0" prefWidth="293.6000732421875" resizable="false" text="Student Name" />
+                                      </columns>
+                                    </TableView>
+                                    <Label fx:id="title19" layoutX="20.0" layoutY="1243.0" prefHeight="22.0" prefWidth="1130.0" text="Grade &amp; Subject Register" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ChoiceBox fx:id="dash_gsr_grade_inp" layoutX="738.0" layoutY="1276.0" prefHeight="29.0" prefWidth="87.0" />
+                                    <ChoiceBox fx:id="dash_gsr_sub_inp" layoutX="837.0" layoutY="1276.0" prefHeight="29.0" prefWidth="223.0" />
+                                    <Button fx:id="gsrAppltBtn" layoutX="1072.0" layoutY="1276.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0" text="Apply" />
+                                    <TableView fx:id="gradeAndSubjectStudentsDetails" layoutX="23.0" layoutY="1277.0" prefHeight="484.0" prefWidth="657.0">
+                                      <columns>
+                                        <TableColumn fx:id="gsr_grade" prefWidth="59.20001220703125" resizable="false" text="Grade" />
+                                          <TableColumn fx:id="gsr_subid" prefWidth="88.26664733886719" resizable="false" text="Subject ID" />
+                                        <TableColumn fx:id="gsr_subname" prefWidth="393.33331298828125" resizable="false" text="Subject" />
+                                          <TableColumn fx:id="gsr_subsc" minWidth="0.0" prefWidth="115.7333984375" resizable="false" text="Students Count" />
+                                      </columns>
+                                    </TableView>
+                                    <Label fx:id="title23" layoutX="20.0" layoutY="1813.0" prefHeight="22.0" prefWidth="1130.0" text="Overdue Fee Report" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="364.0" fitWidth="1129.0" layoutX="23.0" layoutY="2414.0" opacity="0.07" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@exres/form_bg_90.png" />
+                                       </image>
+                                    </ImageView>
+                                    <TextArea fx:id="od_remark" layoutX="540.0" layoutY="2485.0" prefHeight="117.0" prefWidth="507.0" />
+                                    <DatePicker fx:id="od_dp" layoutX="540.0" layoutY="2653.0" />
+                                    <Label fx:id="title24" layoutX="50.0" layoutY="2435.0" text="Student ID">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title25" layoutX="50.0" layoutY="2515.0" text="Student Name">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title26" layoutX="50.0" layoutY="2595.0" text="Contact Number">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="db_unpaid_details_save_btn" layoutX="868.0" layoutY="2658.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="185.0" text="Save" />
+                                    <Label fx:id="title27" layoutX="540.0" layoutY="2455.0" prefHeight="19.0" prefWidth="512.0" text="Remarks Input">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title28" layoutX="540.0" layoutY="2623.0" prefHeight="19.0" prefWidth="202.0" text="Last Reminder Date">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="od_id" fill="#b7b7b7" layoutX="70.0" layoutY="2480.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="od_con" fill="#b7b7b7" layoutX="70.0" layoutY="2641.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="od_name" fill="#b7b7b7" layoutX="70.0" layoutY="2560.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Label fx:id="title29" layoutX="360.0" layoutY="2435.0" prefHeight="22.0" prefWidth="99.0" text="Grade">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="od_grade" fill="#b7b7b7" layoutX="380.0" layoutY="2480.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="od_id1" fill="#b7b7b7" layoutX="60.0" layoutY="2480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="od_con1" fill="#b7b7b7" layoutX="60.0" layoutY="2641.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="od_name1" fill="#b7b7b7" layoutX="60.0" layoutY="2560.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="od_grade1" fill="#b7b7b7" layoutX="370.0" layoutY="2480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Label fx:id="od_out" layoutX="559.0" layoutY="2426.0" />
+                                    <ImageView fitHeight="299.0" fitWidth="266.0" layoutX="891.0" layoutY="840.0" opacity="0.07" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@exres/form_bg_0.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Students profile">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2494.0" prefWidth="1194.0">
+                     <children>
+                        <ScrollPane layoutY="1.0" prefHeight="772.0" prefWidth="1192.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2335.0" prefWidth="1175.0">
+                                 <children>
+                                    <ImageView fitHeight="104.0" fitWidth="216.0" layoutX="984.0" layoutY="51.0" opacity="0.05" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@exres/Scanner_bg.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="qr_cam_field_sp" fitHeight="92.0" fitWidth="92.0" layoutX="990.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
+                                    <TextField fx:id="scarch_id_inp_sp" alignment="CENTER" layoutX="792.0" layoutY="110.0" prefHeight="34.0" prefWidth="144.0" promptText="Student ID" />
+                                    <Label fx:id="gender_output_sp" layoutX="107.0" layoutY="85.0" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="32.0" layoutY="85.0" text="Gender - " textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="name_output_sp" layoutX="104.0" layoutY="45.0" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="32.0" layoutY="45.0" text="Name - " textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="grade_output_sp" layoutX="104.0" layoutY="65.0" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="32.0" layoutY="65.0" text="Grade - " textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="rdate_output_sp" layoutX="171.0" layoutY="125.0" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="32.0" layoutY="125.0" text="Registered date - " textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="mobnum_output_sp" layoutX="171.0" layoutY="105.0" textFill="#b7b7b7">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="32.0" layoutY="105.0" text="Mobile Number - " textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title2" layoutX="83.0" layoutY="449.0" prefHeight="22.0" prefWidth="900.0" text="Monthly fee record" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="fee_datatable" layoutX="83.0" layoutY="490.0" maxWidth="1015.0" minWidth="1015.0" prefHeight="270.0" prefWidth="1015.0" />
+                                    <Label fx:id="title3" layoutX="83.0" layoutY="809.0" prefHeight="22.0" prefWidth="739.0" text="Daily fee record" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="daily_fee_table" layoutX="83.0" layoutY="850.0" maxWidth="1015.0" minWidth="1015.0" prefHeight="270.0" prefWidth="1015.0" />
+                                    <RadioButton fx:id="enable_qr" layoutX="801.0" layoutY="72.0" mnemonicParsing="false" text="QR Scanner" />
+                                    <TextField fx:id="inp_year_fee" layoutX="1005.0" layoutY="445.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="90.0" />
+                                    <Button fx:id="Att_mark_btn" layoutX="886.0" layoutY="273.0" mnemonicParsing="false" text="Mark attendance" />
+                                    <RadioButton fx:id="auto_att_switch" layoutX="757.0" layoutY="277.0" mnemonicParsing="false" text="Auto mark " />
+                                    <Label fx:id="title5" layoutX="756.0" layoutY="175.0" prefHeight="22.0" prefWidth="384.0" text="Attendance">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title4" layoutX="22.0" layoutY="175.0" prefHeight="22.0" prefWidth="686.0" text="Fee">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ListView fx:id="sub_select_fee" layoutX="22.0" layoutY="210.0" prefHeight="104.0" prefWidth="289.0" />
+                                    <TextField fx:id="year_fee" layoutX="331.0" layoutY="270.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="113.0" promptText="Year" />
+                                    <ChoiceBox fx:id="month_fee" layoutX="331.0" layoutY="335.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="131.0" />
+                                    <Button fx:id="mark_fee_btn" layoutX="603.0" layoutY="331.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="101.0" text="Mark fee" />
+                                    <Label fx:id="sp_main_result_out" layoutX="631.0" layoutY="14.0" prefWidth="500.0" text="" wrapText="true" />
+                                    <Label fx:id="title6" layoutX="22.0" layoutY="12.0" prefHeight="22.0" prefWidth="514.0" text="Student detail">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="inp_year_day_fee" layoutX="844.0" layoutY="806.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="89.0" />
+                                    <ChoiceBox fx:id="month_day_fee" layoutX="945.0" layoutY="806.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="150.0" />
+                                    <ChoiceBox fx:id="sublist_att" layoutX="862.0" layoutY="224.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="275.0" />
+                                    <ChoiceBox fx:id="grade_att" layoutX="756.0" layoutY="224.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="94.0" />
+                                    <Label layoutX="344.0" layoutY="319.0" text="Month" textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="770.0" layoutY="208.0" text="Grade" textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="876.0" layoutY="208.0" text="Subject" textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title7" layoutX="83.0" layoutY="1511.0" prefHeight="22.0" prefWidth="418.0" text="All registerd subjects" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="title8" layoutX="579.0" layoutY="1601.0" prefHeight="22.0" prefWidth="519.0" text="Register subject" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="sub_reg_info" layoutX="83.0" layoutY="1554.0" maxWidth="420.0" minWidth="420.0" prefHeight="231.0" prefWidth="420.0">
+                                       <columns>
+                                          <TableColumn fx:id="sub_reg_info_subject_id" editable="false" maxWidth="77.0" minWidth="77.0" prefWidth="77.0" resizable="false" sortable="false" text="Subject ID" />
+                                          <TableColumn fx:id="sub_reg_info_subject" editable="false" maxWidth="237.0" minWidth="237.0" prefWidth="237.0" resizable="false" sortable="false" text="Subject" />
+                                          <TableColumn fx:id="sub_reg_info_date" editable="false" maxWidth="102.0" minWidth="102.0" prefWidth="102.0" resizable="false" sortable="false" text="Registerd_date" />
+                                       </columns>
+                                    </TableView>
+                                    <ChoiceBox fx:id="sublist_new_reg" layoutX="700.0" layoutY="1651.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="399.0" />
+                                    <ChoiceBox fx:id="grade_new_reg" layoutX="580.0" layoutY="1651.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="108.0" />
+                                    <Label layoutX="596.0" layoutY="1635.0" text="Grade" textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="714.0" layoutY="1635.0" text="Subject" textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="reg_new_sub_stu" layoutX="660.0" layoutY="1723.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="378.0" text="Register">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="sp_sub_reg_result_out" layoutX="671.0" layoutY="1693.0" prefHeight="18.0" prefWidth="356.0" text="" wrapText="true" />
+                                    <Button fx:id="erase_stu_btn_sp" layoutX="576.0" layoutY="2073.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="148.0" text="Erase">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="title9" layoutX="573.0" layoutY="2031.0" prefHeight="22.0" prefWidth="563.0" text="Erase This Record" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fill="#ff0000c8" layoutX="578.0" layoutY="2133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="“This function will permanently delete the selected student’s record and all related data from the database. Once deleted, the information cannot be recovered.”" wrappingWidth="545.1482238769531">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Label fx:id="erase_out_sp" layoutX="752.0" layoutY="2082.0" textFill="RED" />
+                                    <Label fx:id="title10" layoutX="85.0" layoutY="2031.0" prefHeight="22.0" prefWidth="445.0" text="Unregister subject" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ChoiceBox fx:id="sublist_new_unreg" layoutX="206.0" layoutY="2081.0" prefHeight="30.0" prefWidth="326.0" />
+                                    <ChoiceBox fx:id="grade_new_unreg" layoutX="86.0" layoutY="2081.0" prefHeight="30.0" prefWidth="108.0" />
+                                    <Label layoutX="102.0" layoutY="2065.0" text="Grade" textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="220.0" layoutY="2065.0" text="Subject" textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="unreg_new_sub_stu" layoutX="126.0" layoutY="2153.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="378.0" text="Unregister">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="sp_sub_unreg_result_out" layoutX="137.0" layoutY="2123.0" prefHeight="18.0" prefWidth="356.0" text="" wrapText="true" />
+                                    <Text fill="#ff0000c8" layoutX="91.0" layoutY="2214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;This function will permanently delete the selected student's subject record from the database, including fee and attendance records. Once unregistered, the information cannot be recovered&quot;" wrappingWidth="444.8814392089844">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Separator fx:id="sp0001" layoutX="6.0" layoutY="1866.0" prefHeight="0.0" prefWidth="1182.0" />
+                                    <RadioButton fx:id="mk_d_fee_ind" layoutX="487.0" layoutY="222.0" mnemonicParsing="false" text="/ Day Fee">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="fp" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="mk_m_fee_ind" layoutX="331.0" layoutY="222.0" mnemonicParsing="false" selected="true" text="/ Month Fee" toggleGroup="$fp" />
+                                    <TextField fx:id="fee_total_out" layoutX="23.0" layoutY="335.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="131.0" promptText="0.00" />
+                                    <Label layoutX="37.0" layoutY="319.0" text="Amount" textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator fx:id="sp00011" layoutX="6.0" layoutY="1859.0" prefHeight="0.0" prefWidth="1182.0" />
+                                    <Label fx:id="title17" layoutX="83.0" layoutY="1169.0" prefHeight="22.0" prefWidth="739.0" text=" Student attendance record" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="attendance_datatable" layoutX="83.0" layoutY="1210.0" maxWidth="1015.0" minWidth="1015.0" prefHeight="270.0" prefWidth="1015.0" />
+                                    <TextField fx:id="inp_year_att" layoutX="844.0" layoutY="1166.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="89.0" />
+                                    <ChoiceBox fx:id="month_att_rec" layoutX="945.0" layoutY="1166.0" maxHeight="29.0" minHeight="29.0" prefHeight="29.0" prefWidth="150.0" />
+                                    <TextField layoutX="263.0" layoutY="1923.0" prefHeight="34.0" prefWidth="196.0" />
+                                    <Label fx:id="title18" layoutX="83.0" layoutY="1881.0" prefHeight="22.0" prefWidth="484.0" text="Update mobile number" textFill="#acacac">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="reg_upd_mob_btn" layoutX="468.0" layoutY="1922.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="95.0" text="Update">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <Label layoutX="102.0" layoutY="1930.0" text="New Mobile Number - " textFill="#a9a9a9">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="vcode_inp_sp" layoutX="899.0" layoutY="2199.0" prefHeight="34.0" prefWidth="120.0" />
+                                    <Button fx:id="reg_rem_ver_btn" layoutX="1028.0" layoutY="2198.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="95.0" text="Verify">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="vCode_output_sp" layoutX="791.0" layoutY="2203.0">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="ver_out_sp" layoutX="870.0" layoutY="2243.0">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Separator layoutX="46.0" layoutY="1995.0" prefHeight="34.0" prefWidth="1113.0" />
+                                    <Separator layoutX="46.0" layoutY="2313.0" prefHeight="0.0" prefWidth="1115.0" />
+                                    <Separator layoutX="46.0" layoutY="2011.0" orientation="VERTICAL" prefHeight="301.0" prefWidth="0.0" />
+                                    <Separator layoutX="1159.0" layoutY="2011.0" orientation="VERTICAL" prefHeight="304.0" prefWidth="0.0" />
+                                    <RadioButton fx:id="manual_fee_rb" layoutX="171.0" layoutY="341.0" mnemonicParsing="false" text="/ Manual Fee" />
+                                    <DatePicker fx:id="df_dp_inp_sp" layoutX="487.0" layoutY="270.0" maxHeight="30.0" minHeight="29.0" prefHeight="30.0" prefWidth="145.0" />
+                                    <Label fx:id="admin_sp_out" layoutX="799.0" layoutY="2274.0" />
+                                    <Button fx:id="mark_tute_btn" layoutX="484.0" layoutY="331.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="101.0" text="Mark tute" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Register students">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="formbg" fitHeight="637.0" fitWidth="450.0" layoutX="32.0" layoutY="57.0" opacity="0.04" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@exres/form_bg.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="45.0" layoutY="95.0" text="Student Name" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="stu_name_reg" layoutX="75.0" layoutY="123.0" prefHeight="27.0" prefWidth="365.0">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="45.0" layoutY="175.0" text="Grade" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="255.0" layoutY="175.0" text="Mobile No." textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="stu_moib_reg" layoutX="285.0" layoutY="203.0" prefHeight="27.0" prefWidth="155.0">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="45.0" layoutY="255.0" text="Gender" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="reg_stu_btn" layoutX="179.0" layoutY="605.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="144.0" text="Register" />
+                        <ChoiceBox fx:id="stu_grade_reg" layoutX="77.0" layoutY="203.0" prefWidth="150.0" />
+                        <RadioButton fx:id="stu_gender1_reg" layoutX="77.0" layoutY="286.0" mnemonicParsing="false" selected="true" text="Male" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="genderGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="stu_gender2_reg" layoutX="147.0" layoutY="286.0" mnemonicParsing="false" text="Female" textFill="WHITE" toggleGroup="$genderGroup">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </RadioButton>
+                        <Label layoutX="45.0" layoutY="335.0" text="Subject" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="stu_subjects_reg" layoutX="75.0" layoutY="365.0" prefHeight="182.0" prefWidth="366.0" />
+                        <Label layoutX="605.0" layoutY="443.0" text="Student ID - " textFill="#a9a9a9">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="id_output" layoutX="715.0" layoutY="443.0" textFill="#b7b7b7">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="605.0" layoutY="533.0" text="Subjects - " textFill="#a9a9a9">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="605.0" layoutY="503.0" text="Gender - " textFill="#a9a9a9">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="gender_output" layoutX="715.0" layoutY="503.0" textFill="#b7b7b7">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="605.0" layoutY="413.0" text="Name - " textFill="#a9a9a9">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="name_output" layoutX="715.0" layoutY="413.0" textFill="#b7b7b7">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="605.0" layoutY="473.0" text="Grade - " textFill="#a9a9a9">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="grade_output" layoutX="715.0" layoutY="473.0" textFill="#b7b7b7">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="reg_status" layoutX="177.0" layoutY="566.0" textFill="RED">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="240.0" fitWidth="236.0" layoutX="702.0" layoutY="78.0" opacity="0.05" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@exres/qr.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="qr_output" fitHeight="233.0" fitWidth="236.0" layoutX="702.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <Text fx:id="subjects_output" fill="#b7b7b7" layoutX="715.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="446.13653564453125">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Configuration">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Separator fx:id="sp0002" layoutX="6.0" layoutY="687.0" prefHeight="23.0" prefWidth="1182.0" />
+                        <TextField fx:id="new_subject_db_inp_conf" layoutX="221.0" layoutY="179.0" maxHeight="33.6" minHeight="33.6" prefHeight="26.0" prefWidth="240.0" />
+                        <Label fx:id="title14" layoutX="39.0" layoutY="40.0" maxWidth="0.0" minWidth="250.0" text="Add new grade" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="new_grade_db_inp_conf" layoutX="59.0" layoutY="75.0" maxHeight="33.6" minHeight="33.6" prefHeight="34.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="grade_list_for_subject_inp_con" layoutX="59.0" layoutY="179.0" maxHeight="33.6" minHeight="33.6" prefWidth="150.0" />
+                        <Label fx:id="title13" layoutX="39.0" layoutY="140.0" maxWidth="0.0" minWidth="250.0" text="Add new subject" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="apply_btn_conf" layoutX="665.0" layoutY="334.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="214.0" text="Apply" />
+                        <Label fx:id="result_out_conf" alignment="CENTER" layoutX="62.0" layoutY="343.0" prefWidth="442.0" textFill="#c1c1c1" />
+                        <TextField fx:id="new_subject_fee_inp_conf" layoutX="732.0" layoutY="179.0" maxHeight="33.6" maxWidth="150.0" minHeight="33.6" promptText="0.00" />
+                        <Label layoutX="71.0" layoutY="163.0" text="Grade" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="new_subject_tn_inp_conf" layoutX="477.0" layoutY="179.0" maxHeight="33.6" maxWidth="240.0" minHeight="33.6" prefWidth="240.0" />
+                        <Separator fx:id="sp00021" layoutX="6.0" layoutY="742.0" prefHeight="23.0" prefWidth="1182.0" />
+                        <ChoiceBox fx:id="sub_fee_update_grade_conf" layoutX="59.0" layoutY="279.0" maxHeight="33.6" minHeight="33.6" prefWidth="150.0" />
+                        <Label fx:id="title12" layoutX="39.0" layoutY="240.0" maxWidth="0.0" minWidth="250.0" text="Update fee amount" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="sub_fee_update_fee_conf" layoutX="732.0" layoutY="279.0" maxHeight="33.6" maxWidth="150.0" minHeight="33.6" promptText="0.00" />
+                        <Label layoutX="71.0" layoutY="263.0" text="Grade" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="sub_fee_update_date_conf" layoutX="516.0" layoutY="279.0" maxHeight="33.6" minHeight="33.6" />
+                        <ChoiceBox fx:id="sub_fee_update_sub_conf" layoutX="221.0" layoutY="279.0" maxHeight="33.6" minHeight="33.6" prefHeight="29.0" prefWidth="282.0" />
+                        <Label layoutX="527.0" layoutY="263.0" text="Effective Date" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="233.0" layoutY="263.0" text="Subject" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="232.0" layoutY="163.0" text="Subject Name" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="744.0" layoutY="163.0" text="Fee" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="489.0" layoutY="163.0" text="Teacher Name" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="744.0" layoutY="263.0" text="Fee" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="71.0" layoutY="59.0" text="Grade" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="34.0" layoutY="714.0" text="Database Server IP" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="db_ip_out_conf" editable="false" layoutX="169.0" layoutY="709.0" prefHeight="34.0" prefWidth="200.0" />
+                        <Label layoutX="404.0" layoutY="714.0" text="Student Files Directory" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="sc_folder_path_inp_conf2" editable="false" layoutX="567.0" layoutY="709.0" prefHeight="34.0" prefWidth="200.0" text="C:\ProLog\students" />
+                        <Label layoutX="797.0" layoutY="714.0" text="Receipt Files Directory" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="sc_folder_path_inp_conf11" editable="false" layoutX="960.0" layoutY="709.0" prefHeight="34.0" prefWidth="200.0" text="C:\ProLog\Bills" />
+                        <ChoiceBox fx:id="conf_utn_grade" layoutX="59.0" layoutY="498.0" maxHeight="33.6" minHeight="33.6" prefWidth="150.0" />
+                        <Label fx:id="title20" layoutX="39.0" layoutY="459.0" maxWidth="847.0" minWidth="250.0" prefHeight="22.0" prefWidth="842.0" text="Update teacher name" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="71.0" layoutY="482.0" text="Grade" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="conf_utn_sub" layoutX="221.0" layoutY="498.0" maxHeight="33.6" minHeight="33.6" prefHeight="29.0" prefWidth="282.0" />
+                        <Label layoutX="233.0" layoutY="482.0" text="Subject" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="conf_utn_name" layoutX="516.0" layoutY="498.0" maxHeight="33.6" maxWidth="240.0" minHeight="33.6" prefWidth="240.0" />
+                        <Label layoutX="527.0" layoutY="482.0" text="New Teacher Name" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="apply_btn_conf2" layoutX="768.0" layoutY="499.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" text="Apply" />
+                        <ChoiceBox fx:id="conf_rg_grade" layoutX="59.0" layoutY="588.0" maxHeight="33.6" minHeight="33.6" prefWidth="150.0" />
+                        <Label fx:id="title21" layoutX="39.0" layoutY="549.0" maxWidth="302.0" minWidth="250.0" prefHeight="22.0" prefWidth="302.0" text="Remove grade, all related datas" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="71.0" layoutY="572.0" text="Grade" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="conf_rs_grade" layoutX="379.0" layoutY="588.0" maxHeight="34.0" minHeight="33.6" prefHeight="34.0" prefWidth="121.0" />
+                        <Label fx:id="title22" layoutX="359.0" layoutY="549.0" maxWidth="591.0" minWidth="250.0" prefHeight="22.0" prefWidth="520.0" text="Remove subject, all related datas" textFill="#a8a8a8">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="391.0" layoutY="572.0" text="Grade" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="conf_rs_sub" layoutX="516.0" layoutY="588.0" maxHeight="34.0" minHeight="33.6" prefHeight="34.0" prefWidth="239.0" />
+                        <Label layoutX="528.0" layoutY="572.0" text="Subject" textFill="DARKGRAY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="apply_btn_conf3" layoutX="225.0" layoutY="589.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" text="Remove" />
+                        <Separator layoutX="29.0" layoutY="419.0" prefHeight="0.0" prefWidth="853.0" />
+                        <Button fx:id="apply_btn_conf4" layoutX="768.0" layoutY="589.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="112.0" text="Remove" />
+                        <Label fx:id="admin_conf_out" layoutX="965.0" layoutY="586.0" />
+                        <Separator layoutX="29.0" layoutY="423.0" prefHeight="0.0" prefWidth="853.0" />
+                        <Separator layoutX="29.0" layoutY="659.0" prefHeight="0.0" prefWidth="853.0" />
+                        <Separator layoutX="29.0" layoutY="663.0" prefHeight="0.0" prefWidth="853.0" />
+                        <ImageView fitHeight="269.0" fitWidth="231.0" layoutX="1043.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@exres/form_bg_black.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="ram_usg" layoutX="1078.0" layoutY="83.0" textFill="WHITE" />
+                        <Label fx:id="cpu_usg" layoutX="1078.0" layoutY="182.0" textFill="WHITE" />
+                        <Label fx:id="ram_bal" layoutX="1078.0" layoutY="133.0" textFill="WHITE" />
+                        <Label fx:id="cpu_bal" layoutX="1078.0" layoutY="232.0" textFill="WHITE" />
+                        <Label fx:id="title35" layoutX="1051.0" layoutY="9.0" prefHeight="14.0" prefWidth="138.0" text="Usage Stats" textAlignment="CENTER">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1049.0" layoutY="165.0" text="CPU Usage :" textFill="#818181" />
+                        <Label layoutX="1049.0" layoutY="215.0" text="CPU Available :" textFill="#818181" />
+                        <Label layoutX="1049.0" layoutY="65.0" text="RAM Usage :" textFill="#818181" />
+                        <Label layoutX="1049.0" layoutY="115.0" text="RAM Available :" textFill="#818181" />
+                        <Label fx:id="conf_out_2" layoutX="61.0" layoutY="633.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
