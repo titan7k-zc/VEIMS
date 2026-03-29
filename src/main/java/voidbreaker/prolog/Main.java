@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate; // push erro check
+import java.time.LocalDate; 
 
 public class Main extends Application {
 
