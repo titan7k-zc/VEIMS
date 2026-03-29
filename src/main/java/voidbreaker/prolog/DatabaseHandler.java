@@ -1349,6 +1349,76 @@ public class DatabaseHandler {
     }
 
     /**
+     * Retrieves the number of distinct students who paid a selected teacher on a selected date.
+     * Records are collected from both monthly and daily payment tables using payment_date.
+     * @param teacher The teacher name.
+     * @param paymentDate The selected payment date.
+     * @return The number of unique students who paid on that date.
+     */
+    public int getTeacherDailyPaidStudentCount(String teacher, LocalDate paymentDate) {
+        String sql = "SELECT COUNT(DISTINCT payments.student_id) AS paid_student_count " +
+                "FROM (" +
+                "   SELECT student_id, subject_id, payment_date FROM fee_payments " +
+                "   UNION " +
+                "   SELECT student_id, subject_id, payment_date FROM daily_fee_payments" +
+                ") payments " +
+                "JOIN subjects s ON payments.subject_id = s.id " +
+                "WHERE payments.payment_date = ? " +
+                "AND UPPER(TRIM(s.teacher)) = UPPER(TRIM(?))";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, paymentDate.toString());
+            pstmt.setString(2, teacher);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("paid_student_count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    /**
+     * Retrieves subject-wise distinct student payment counts for a teacher on a selected date.
+     * The key format is "grade::subject".
+     * @param teacher The teacher name.
+     * @param paymentDate The selected payment date.
+     * @return A map of subject keys to distinct paid student counts.
+     */
+    public Map<String, Integer> getTeacherDailyPaidStudentCountsBySubject(String teacher, LocalDate paymentDate) {
+        Map<String, Integer> counts = new HashMap<>();
+        String sql = "SELECT g.name AS grade_name, s.name AS subject_name, COUNT(DISTINCT payments.student_id) AS paid_student_count " +
+                "FROM (" +
+                "   SELECT student_id, subject_id, payment_date FROM fee_payments " +
+                "   UNION " +
+                "   SELECT student_id, subject_id, payment_date FROM daily_fee_payments" +
+                ") payments " +
+                "JOIN subjects s ON payments.subject_id = s.id " +
+                "JOIN grades g ON s.grade_id = g.id " +
+                "WHERE payments.payment_date = ? " +
+                "AND UPPER(TRIM(s.teacher)) = UPPER(TRIM(?)) " +
+                "GROUP BY g.name, s.name";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, paymentDate.toString());
+            pstmt.setString(2, teacher);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                counts.put(
+                        rs.getString("grade_name") + "::" + rs.getString("subject_name"),
+                        rs.getInt("paid_student_count")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return counts;
+    }
+
+    /**
      * Retrieves revenue data for the institute, including fee totals
      * for a specific year, month, and day.
      * @param year The selected year for filtering year_fee.

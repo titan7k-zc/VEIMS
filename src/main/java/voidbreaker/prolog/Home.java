@@ -1486,7 +1486,17 @@ public class Home {
             return;
         }
 
-        String billContent = buildTeacherBillContent(selectedTeacher, selectedDate, teacherRecords);
+        int paidStudentCount = dbHandler.getTeacherDailyPaidStudentCount(selectedTeacher, selectedDate);
+        Map<String, Integer> subjectWisePaidStudentCounts =
+                dbHandler.getTeacherDailyPaidStudentCountsBySubject(selectedTeacher, selectedDate);
+
+        String billContent = buildTeacherBillContent(
+                selectedTeacher,
+                selectedDate,
+                teacherRecords,
+                paidStudentCount,
+                subjectWisePaidStudentCounts
+        );
 
         Path savedBillPath;
         try {
@@ -1505,7 +1515,13 @@ public class Home {
         }
     }
 
-    private String buildTeacherBillContent(String teacher, LocalDate selectedDate, List<RevenueRecord> teacherRecords) {
+    private String buildTeacherBillContent(
+            String teacher,
+            LocalDate selectedDate,
+            List<RevenueRecord> teacherRecords,
+            int paidStudentCount,
+            Map<String, Integer> subjectWisePaidStudentCounts
+    ) {
         LocalDateTime now = LocalDateTime.now();
         double totalYearIncome = 0.0;
         double totalMonthIncome = 0.0;
@@ -1536,8 +1552,14 @@ public class Home {
             totalDayIncome += record.getDayIncome();
             detailCount++;
 
+            int subjectPaidStudentCount = subjectWisePaidStudentCounts.getOrDefault(
+                    buildTeacherBillSubjectKey(record.getGrade(), record.getSubject()),
+                    0
+            );
+
             bill.append(detailCount).append(". Grade        : ").append(record.getGrade()).append(System.lineSeparator());
             bill.append("   Subject      : ").append(record.getSubject()).append(System.lineSeparator());
+            bill.append("   Paid Students: ").append(subjectPaidStudentCount).append(System.lineSeparator());
             bill.append("   Day Income   : Rs. ").append(formatAmount(record.getDayIncome())).append(System.lineSeparator());
             bill.append("   Month Income : Rs. ").append(formatAmount(record.getMonthIncome())).append(System.lineSeparator());
             bill.append("   Year Income  : Rs. ").append(formatAmount(record.getYearIncome())).append(System.lineSeparator());
@@ -1546,12 +1568,17 @@ public class Home {
 
         bill.append("--------------------------------------").append(System.lineSeparator());
         bill.append("Subjects Paid On Date : ").append(detailCount).append(System.lineSeparator());
+        bill.append("Students Paid On Date : ").append(paidStudentCount).append(System.lineSeparator());
         bill.append("Teacher Day Total     : Rs. ").append(formatAmount(totalDayIncome)).append(System.lineSeparator());
         bill.append("Teacher Month Total   : Rs. ").append(formatAmount(totalMonthIncome)).append(System.lineSeparator());
         bill.append("Teacher Year Total    : Rs. ").append(formatAmount(totalYearIncome)).append(System.lineSeparator());
         bill.append("--------------------------------------").append(System.lineSeparator());
 
         return bill.toString();
+    }
+
+    private String buildTeacherBillSubjectKey(String grade, String subject) {
+        return grade + "::" + subject;
     }
 
     private Path saveTeacherBill(String teacher, LocalDate selectedDate, String billContent) throws IOException {
