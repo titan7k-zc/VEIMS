@@ -19,12 +19,17 @@ import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.print.PageLayout;
+import javafx.print.PrinterJob;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
@@ -436,6 +441,15 @@ public class Home {
     @FXML
     private TableColumn<StudentRecord, String> gsr_stuName;
 
+    // --- Teacher Bill Tab ---
+    @FXML
+    private ChoiceBox<String> teacher_name_bill;
+    @FXML
+    private DatePicker teacher_date_bill;
+    @FXML
+    private Button r5_print_btn;
+    @FXML
+    private Text outputmsg;
 
     // clock
     @FXML
@@ -624,6 +638,8 @@ public class Home {
                 loadInstituteRevenueTable();
             }
         });
+
+        setupTeacherBillSection();
 
 
         // Setup logout button
@@ -1411,6 +1427,176 @@ public class Home {
         iro_table.setItems(instituteRevenueData);
         iro_table.setSelectionModel(null); // Disable selection
         iro_table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
+
+    private void setupTeacherBillSection() {
+        teacher_date_bill.setValue(LocalDate.now());
+        loadTeacherNamesForBill();
+        setStatusText(outputmsg, "", "transparent");
+
+        r5_print_btn.setOnAction(event -> printTeacherBill());
+    }
+
+    private void loadTeacherNamesForBill() {
+        String selectedTeacher = teacher_name_bill.getValue();
+        List<String> teachers = dbHandler.getTeacherNames();
+        teacher_name_bill.getItems().setAll(teachers);
+
+        if (selectedTeacher != null && teachers.contains(selectedTeacher)) {
+            teacher_name_bill.setValue(selectedTeacher);
+        } else {
+            teacher_name_bill.getSelectionModel().clearSelection();
+        }
+    }
+
+    private void printTeacherBill() {
+        String selectedTeacher = teacher_name_bill.getValue();
+        if (selectedTeacher == null || selectedTeacher.trim().isEmpty()) {
+            setStatusText(outputmsg, "Select teacher name.", "red");
+            return;
+        }
+
+        LocalDate selectedDate = teacher_date_bill.getValue();
+        if (selectedDate == null) {
+            setStatusText(outputmsg, "Select date.", "red");
+            return;
+        }
+
+        List<RevenueRecord> teacherRecords = dbHandler.getTeacherRevenueForTeacher(
+                selectedTeacher,
+                selectedDate.getYear(),
+                selectedDate.getMonthValue(),
+                selectedDate.getDayOfMonth()
+        );
+
+        teacherRecords.sort(Comparator
+                .comparing(RevenueRecord::getGrade, String.CASE_INSENSITIVE_ORDER)
+                .thenComparing(RevenueRecord::getSubject, String.CASE_INSENSITIVE_ORDER));
+
+        boolean hasIncomeForSelectedDate = false;
+        for (RevenueRecord record : teacherRecords) {
+            if (record.getDayIncome() > 0) {
+                hasIncomeForSelectedDate = true;
+                break;
+            }
+        }
+
+        if (!hasIncomeForSelectedDate) {
+            setStatusText(outputmsg, "Wrong date or no income for selected teacher.", "red");
+            return;
+        }
+
+        String billContent = buildTeacherBillContent(selectedTeacher, selectedDate, teacherRecords);
+
+        Path savedBillPath;
+        try {
+            savedBillPath = saveTeacherBill(selectedTeacher, selectedDate, billContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+            setStatusText(outputmsg, "Failed to create teacher bill.", "red");
+            return;
+        }
+
+        boolean printed = printTextContent(billContent);
+        if (printed) {
+            setStatusText(outputmsg, "Printed. Saved to " + savedBillPath, "#129a00");
+        } else {
+            setStatusText(outputmsg, "Bill saved, but printing failed. File: " + savedBillPath, "#d17d00");
+        }
+    }
+
+    private String buildTeacherBillContent(String teacher, LocalDate selectedDate, List<RevenueRecord> teacherRecords) {
+        LocalDateTime now = LocalDateTime.now();
+        double totalYearIncome = 0.0;
+        double totalMonthIncome = 0.0;
+        double totalDayIncome = 0.0;
+        int detailCount = 0;
+
+        StringBuilder bill = new StringBuilder();
+        bill.append("--------------------------------------").append(System.lineSeparator());
+        bill.append("  Vidupiyasa Educational Institute").append(System.lineSeparator());
+        bill.append("Boga Asala, Rathnapura Road, Baduraliya").append(System.lineSeparator());
+        bill.append("          Tel: 070 7365753").append(System.lineSeparator());
+        bill.append(System.lineSeparator());
+        bill.append("          TEACHER INCOME BILL").append(System.lineSeparator());
+        bill.append("--------------------------------------").append(System.lineSeparator());
+        bill.append("Teacher      : ").append(teacher).append(System.lineSeparator());
+        bill.append("Selected Date: ").append(selectedDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))).append(System.lineSeparator());
+        bill.append("Printed At   : ").append(now.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))).append(System.lineSeparator());
+        bill.append("--------------------------------------").append(System.lineSeparator());
+
+        for (RevenueRecord record : teacherRecords) {
+            totalYearIncome += record.getYearIncome();
+            totalMonthIncome += record.getMonthIncome();
+
+            if (record.getDayIncome() <= 0) {
+                continue;
+            }
+
+            totalDayIncome += record.getDayIncome();
+            detailCount++;
+
+            bill.append(detailCount).append(". Grade        : ").append(record.getGrade()).append(System.lineSeparator());
+            bill.append("   Subject      : ").append(record.getSubject()).append(System.lineSeparator());
+            bill.append("   Day Income   : Rs. ").append(formatAmount(record.getDayIncome())).append(System.lineSeparator());
+            bill.append("   Month Income : Rs. ").append(formatAmount(record.getMonthIncome())).append(System.lineSeparator());
+            bill.append("   Year Income  : Rs. ").append(formatAmount(record.getYearIncome())).append(System.lineSeparator());
+            bill.append(System.lineSeparator());
+        }
+
+        bill.append("--------------------------------------").append(System.lineSeparator());
+        bill.append("Subjects Paid On Date : ").append(detailCount).append(System.lineSeparator());
+        bill.append("Teacher Day Total     : Rs. ").append(formatAmount(totalDayIncome)).append(System.lineSeparator());
+        bill.append("Teacher Month Total   : Rs. ").append(formatAmount(totalMonthIncome)).append(System.lineSeparator());
+        bill.append("Teacher Year Total    : Rs. ").append(formatAmount(totalYearIncome)).append(System.lineSeparator());
+        bill.append("--------------------------------------").append(System.lineSeparator());
+
+        return bill.toString();
+    }
+
+    private Path saveTeacherBill(String teacher, LocalDate selectedDate, String billContent) throws IOException {
+        Path billDirectory = Paths.get("C:\\prolog\\bills\\teacher");
+        Files.createDirectories(billDirectory);
+
+        String teacherNameForFile = teacher.replaceAll("[\\\\/:*?\"<>|\\s]+", "_");
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        String datePart = selectedDate.format(DateTimeFormatter.BASIC_ISO_DATE);
+        Path billPath = billDirectory.resolve(teacherNameForFile + "_" + datePart + "_" + timestamp + ".txt");
+
+        Files.writeString(billPath, billContent);
+        return billPath;
+    }
+
+    private boolean printTextContent(String textContent) {
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+        if (printerJob == null) {
+            return false;
+        }
+
+        PageLayout pageLayout = printerJob.getJobSettings().getPageLayout();
+        Text printableText = new Text(textContent);
+        printableText.setStyle("-fx-font-family: 'Consolas'; -fx-font-size: 11px;");
+        printableText.setWrappingWidth(Math.max(1, pageLayout.getPrintableWidth() - 48));
+
+        VBox printableRoot = new VBox(printableText);
+        printableRoot.setPadding(new Insets(24));
+        printableRoot.setPrefWidth(pageLayout.getPrintableWidth());
+        printableRoot.applyCss();
+        printableRoot.layout();
+
+        double widthScale = pageLayout.getPrintableWidth() / printableRoot.getBoundsInLocal().getWidth();
+        double heightScale = pageLayout.getPrintableHeight() / printableRoot.getBoundsInLocal().getHeight();
+        double scaleFactor = Math.min(1.0, Math.min(widthScale, heightScale));
+        printableRoot.getTransforms().add(new Scale(scaleFactor, scaleFactor));
+
+        boolean printed = printerJob.printPage(pageLayout, printableRoot);
+        if (printed) {
+            printerJob.endJob();
+        } else {
+            printerJob.cancelJob();
+        }
+
+        return printed;
     }
 
     // =================================================================================
@@ -2559,6 +2745,13 @@ public class Home {
         });
     }
 
+    private void setStatusText(Text textNode, String text, String color) {
+        Platform.runLater(() -> {
+            textNode.setText(text);
+            textNode.setStyle("-fx-fill: " + color + "; -fx-font-weight: bold;");
+        });
+    }
+
     private String generateNextStudentId() {
         String lastId = dbHandler.getLastStudentId();
         int batch = 1, number = 0;
@@ -2919,6 +3112,7 @@ public class Home {
         grade_att.getSelectionModel().clearSelection();
         loadGradesIntoChoiceBox(conf_utn_grade);
         conf_utn_grade.getSelectionModel().clearSelection();
+        loadTeacherNamesForBill();
     }
 
     private void refreshAll() {

@@ -1279,6 +1279,76 @@ public class DatabaseHandler {
     }
 
     /**
+     * Retrieves a sorted list of distinct teacher names from the subjects table.
+     * Blank teacher names are excluded.
+     * @return A List of unique teacher names.
+     */
+    public List<String> getTeacherNames() {
+        List<String> teachers = new ArrayList<>();
+        String sql = "SELECT DISTINCT TRIM(teacher) AS teacher_name " +
+                "FROM subjects " +
+                "WHERE teacher IS NOT NULL AND TRIM(teacher) <> '' " +
+                "ORDER BY teacher_name";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                teachers.add(rs.getString("teacher_name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return teachers;
+    }
+
+    /**
+     * Retrieves revenue data for a single teacher for the selected year, month, and day.
+     * @param teacher The teacher name to filter by.
+     * @param year The selected year.
+     * @param month The selected month.
+     * @param day The selected day.
+     * @return A List of RevenueRecord objects for the selected teacher.
+     */
+    public List<RevenueRecord> getTeacherRevenueForTeacher(String teacher, int year, int month, int day) {
+        List<RevenueRecord> revenueRecords = new ArrayList<>();
+        String sql = "SELECT g.name AS grade_name, s.name AS subject_name, TRIM(s.teacher) AS teacher_name, " +
+                "yf.total AS year_total, mf.total AS month_total, df.total AS day_total " +
+                "FROM subjects s " +
+                "JOIN grades g ON s.grade_id = g.id " +
+                "LEFT JOIN year_fee yf ON s.id = yf.subject_id AND yf.year = ? " +
+                "LEFT JOIN month_fee mf ON s.id = mf.subject_id AND mf.year = ? AND mf.month = ? " +
+                "LEFT JOIN day_fee df ON s.id = df.subject_id AND df.year = ? AND df.month = ? AND df.day = ? " +
+                "WHERE UPPER(TRIM(s.teacher)) = UPPER(TRIM(?))";
+
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, year);
+            pstmt.setInt(2, year);
+            pstmt.setInt(3, month);
+            pstmt.setInt(4, year);
+            pstmt.setInt(5, month);
+            pstmt.setInt(6, day);
+            pstmt.setString(7, teacher);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                revenueRecords.add(new RevenueRecord(
+                        rs.getString("grade_name"),
+                        rs.getString("subject_name"),
+                        rs.getString("teacher_name"),
+                        rs.getDouble("year_total") * 0.8,
+                        rs.getDouble("month_total") * 0.8,
+                        rs.getDouble("day_total") * 0.8
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return revenueRecords;
+    }
+
+    /**
      * Retrieves revenue data for the institute, including fee totals
      * for a specific year, month, and day.
      * @param year The selected year for filtering year_fee.
