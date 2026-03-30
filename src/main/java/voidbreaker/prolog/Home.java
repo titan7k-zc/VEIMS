@@ -1561,8 +1561,6 @@ public class Home {
             bill.append("   Subject      : ").append(record.getSubject()).append(System.lineSeparator());
             bill.append("   Paid Students: ").append(subjectPaidStudentCount).append(System.lineSeparator());
             bill.append("   Day Income   : Rs. ").append(formatAmount(record.getDayIncome())).append(System.lineSeparator());
-            bill.append("   Month Income : Rs. ").append(formatAmount(record.getMonthIncome())).append(System.lineSeparator());
-            bill.append("   Year Income  : Rs. ").append(formatAmount(record.getYearIncome())).append(System.lineSeparator());
             bill.append(System.lineSeparator());
         }
 
